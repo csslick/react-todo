@@ -77,3 +77,10 @@ button {
   background: #f99;
   color: #fff;
 }
+
+.submit-btn {
+  background: rgb(89, 177, 89);
+  color: #fff;
+  border-color: transparent;
+  text-transform: uppercase;
+}
