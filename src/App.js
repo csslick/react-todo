@@ -3,9 +3,21 @@ import './App.css';
 import List from './components/List';
 import Alert from './components/Alert';
 
+// 로컬스토리지를 데이터 읽기
+const getLocalStorage = () => {
+  let list = localStorage.getItem('list');
+  // 직접 setList 하면 안되고(useEffect 무한 루프돔) useEffect로 전달
+  if(list) {
+    return JSON.parse(localStorage.getItem('list'))
+  } else {
+    return []
+  }
+}
+
 function App() {
   const [name, setName] = useState('');
-  const [list, setList] = useState([]);
+  // 로컬 스토리지에서 데이터 읽기
+  const [list, setList] = useState(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({
@@ -82,6 +94,11 @@ function App() {
       console.log(list)
     }
   }
+
+  useEffect(() => {
+    // 로컬 스토리지에 저장
+    localStorage.setItem('list', JSON.stringify(list));
+  }, [list])
 
   return (
     <section>
